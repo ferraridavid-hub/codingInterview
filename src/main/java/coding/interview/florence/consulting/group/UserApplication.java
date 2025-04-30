@@ -1,4 +1,4 @@
-package coding.interview.florence.consulting.group.user;
+package coding.interview.florence.consulting.group;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
