@@ -13,14 +13,27 @@ public class UserController {
     @Autowired
     UserRepository userRepository;
 
+    @GetMapping
+    public ResponseEntity<List<UserEntity>> getUserListByFilter(@RequestParam(required = false) String name,
+                                                                @RequestParam(required = false) String lastName) {
+        if (name != null && lastName != null) {
+            return ResponseEntity.ofNullable(userRepository.findByNameAndLastName(name, lastName));
+        }
+
+        if (name != null) {
+            return ResponseEntity.ofNullable(userRepository.findByName(name));
+        }
+
+        if (lastName != null) {
+            return ResponseEntity.ofNullable(userRepository.findByLastName(lastName));
+        }
+
+        return ResponseEntity.ofNullable(userRepository.findAll());
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<UserEntity> getUserById(@PathVariable Long id) {
         return ResponseEntity.of(userRepository.findById(id));
-    }
-
-    @GetMapping
-    public ResponseEntity<List<UserEntity>> getAllUsers() {
-        return ResponseEntity.ofNullable(userRepository.findAll());
     }
 
     @DeleteMapping("/{id}")
@@ -41,9 +54,12 @@ public class UserController {
                     user.setName(userEntity.getName());
                     return userRepository.save(user);
                 })
-                .orElseGet(() -> {return userRepository.save(userEntity);});
+                .orElseGet(() -> {
+                    return userRepository.save(userEntity);
+                });
 
         return ResponseEntity.ofNullable(userToBePersisted);
     }
+
 }
 
