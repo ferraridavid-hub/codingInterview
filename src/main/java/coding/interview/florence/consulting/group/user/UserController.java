@@ -54,9 +54,7 @@ public class UserController {
                     user.setName(userEntity.getName());
                     return userRepository.save(user);
                 })
-                .orElseGet(() -> {
-                    return userRepository.save(userEntity);
-                });
+                .orElseGet(() -> userRepository.save(userEntity));
 
         return ResponseEntity.ofNullable(userToBePersisted);
     }
