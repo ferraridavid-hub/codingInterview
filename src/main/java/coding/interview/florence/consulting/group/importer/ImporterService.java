@@ -22,26 +22,27 @@ public class ImporterService {
     @Autowired
     private UserRepository userRepository;
 
-    public UserEntity importUsers(InputStream is) {
-        try (BufferedReader fileReader = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))) {
+    public void importUsers(InputStream is) {
+        try (BufferedReader fileReader = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
+        CSVReader csvReader = new CSVReader(fileReader)) {
 
-            CSVReader csvReader = new CSVReader(fileReader);
-            String[] line;
             csvReader.readNext();   // skip header
+
+            String[] line;
             while((line = csvReader.readNext()) != null) {
                 UserEntity userToBePersisted = mapUserEntity(line);
                 if (userToBePersisted != null) {
                     userRepository.save(userToBePersisted);
                 }
             }
+
         } catch (IOException | CsvValidationException e) {
             throw new RuntimeException("failed to parse CSV file: " + e.getMessage());
         }
-        return null;
     }
 
     private UserEntity mapUserEntity(String[] csvLine) {
-        if (csvLine.length < 2) {
+        if (csvLine.length < 3) {
             return null;
         }
 
