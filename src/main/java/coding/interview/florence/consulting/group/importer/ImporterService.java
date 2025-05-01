@@ -7,6 +7,7 @@ import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import com.opencsv.exceptions.CsvValidationException;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +23,7 @@ public class ImporterService {
     @Autowired
     private UserRepository userRepository;
 
-    public void importUsers(InputStream is) {
+    public UserEntity importUsers(InputStream is) {
         try (BufferedReader fileReader = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
         CSVReader csvReader = new CSVReader(fileReader)) {
 
@@ -39,6 +40,8 @@ public class ImporterService {
         } catch (IOException | CsvValidationException e) {
             throw new RuntimeException("failed to parse CSV file: " + e.getMessage());
         }
+
+        return null;
     }
 
     private UserEntity mapUserEntity(String[] csvLine) {
