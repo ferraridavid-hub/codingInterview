@@ -52,6 +52,7 @@ public class UserController {
                 .map(user -> {
                     user.setLastName(userEntity.getLastName());
                     user.setName(userEntity.getName());
+                    user.setEmail(userEntity.getEmail());
                     return userRepository.save(user);
                 })
                 .orElseGet(() -> userRepository.save(userEntity));

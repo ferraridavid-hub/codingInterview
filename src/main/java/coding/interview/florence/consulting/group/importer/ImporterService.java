@@ -47,7 +47,8 @@ public class ImporterService {
 
         String name = csvLine[0].trim();
         String lastName = csvLine[1].trim();
+        String email = csvLine[2].trim();
 
-        return new UserEntity(name, lastName);
+        return new UserEntity(name, lastName, email);
     }
 }
