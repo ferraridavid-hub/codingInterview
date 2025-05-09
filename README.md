@@ -43,6 +43,7 @@ The application exposes the following REST endpoints:
 | GET    | `/api/v1/users/{id}` | Retrieve a user by ID    |
 | PUT    | `/api/v1/users/{id}` | Update an existing user  |
 | DELETE | `/api/v1/users/{id}` | Delete a user by ID      |
+| POST   | `/api/v1/importer`   | Import users via multipart cvs file    |
 
 ## Database Configuration
 
