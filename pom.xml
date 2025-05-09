@@ -54,6 +54,12 @@
 			<artifactId>opencsv</artifactId>
 			<version>5.10</version>
 		</dependency>
+<!--		&lt;!&ndash; https://mvnrepository.com/artifact/org.springframework/spring-context-support &ndash;&gt;-->
+<!--		<dependency>-->
+<!--			<groupId>org.springframework</groupId>-->
+<!--			<artifactId>spring-context-support</artifactId>-->
+<!--			<version>7.0.0-M4</version>-->
+<!--		</dependency>-->
 	</dependencies>
 
 	<build>
